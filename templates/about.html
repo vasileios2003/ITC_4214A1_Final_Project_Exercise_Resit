@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <h1 class="display-4">Meet The Founder 📚</h1>
+  <img src="{% static 'images/About_Image.jpg' %}" class="img-fluid float-left mr-3 rounded" 
+     style="max-width: 400px; height: auto;" 
+     alt="About Image">
+  <h2>Vasilis Andronopoulos</h2>   
+  <p class="lead">"This website was created as way to discover the different kinds of books that exist"</p>
+  <h3>If you want learn more contact us at the "Contact Us" page</h3>
+
+  {% if user.is_authenticated %}
+    <p class="text-success">You're logged in as {{ user.username }}.</p>
+  {% else %}
+    <a href="{% url 'login' %}" class="btn btn-primary btn-lg me-2">Sign In</a>
+    <a href="{% url 'register' %}" class="btn btn-outline-secondary btn-lg">Register</a>
+  {% endif %}
+</div>
+{% endblock %}

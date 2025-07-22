@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <form action="/action_page.php">
+    <label for="fname">First Name</label>
+    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+    <label for="lname">Last Name</label>
+    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+    <label for="email">Email</label>
+    <input type="text" name="email" placeholder="Your email..">
+
+    <label for="subject">Subject</label>
+    <select>  
+      <option value="Order">Order</option>
+      <option value="Donation">Donation</option>
+    </select>
+    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+
+    <input type="submit" value="Submit">
+  </form>
+</div>  
+
+  {% if user.is_authenticated %}
+    <p class="text-success">You're logged in as {{ user.username }}.</p>
+  {% else %}
+    <a href="{% url 'login' %}" class="btn btn-primary btn-lg me-2">Sign In</a>
+    <a href="{% url 'register' %}" class="btn btn-outline-secondary btn-lg">Register</a>
+  {% endif %}
+</div>
+{% endblock %}

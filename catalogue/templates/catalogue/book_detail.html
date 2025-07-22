@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-5">
+      {% if book.image %}
+        <img src="{{ book.image.url }}" class="img-fluid rounded" alt="{{ book.name }}">
+      {% else %}
+        <img src="https://via.placeholder.com/400x600?text=No+Image" class="img-fluid rounded">
+      {% endif %}
+    </div>
+
+    <div class="col-md-7">
+      <h2>{{ book.name }}</h2>
+      <p><strong>Author:</strong> {{ book.author }}</p>
+      <p><strong>Price:</strong> ${{ book.price }}</p>
+      <p><strong>Description:</strong></p>
+      <p>{{ book.description }}</p>
+
+      {% if user.is_authenticated %}
+        <form method="post" action="{% url 'add_to_cart' book.id %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-success mt-3">Add to Cart</button>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if user.is_authenticated %}
+    <div class="mt-5" id="rating-stars" data-book-id="{{ book.id }}">
+      <strong>Rate this book:</strong>
+      {% for i in "12345" %}
+        <span class="star" data-value="{{ i }}">★</span>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div class="mt-5">
+    <h4>You might also like:</h4>
+    <div class="row">
+      {% for rec in recommendations %}
+        <div class="col-md-3">
+          <div class="card">
+            <img src="{{ rec.image.url }}" class="card-img-top">
+            <div class="card-body">
+              <h5 class="card-title">{{ rec.name }}</h5>
+              <a href="{% url 'book_detail' rec.id %}" class="btn btn-outline-primary btn-sm">View</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

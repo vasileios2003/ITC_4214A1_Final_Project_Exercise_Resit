@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2>📊 Admin Dashboard</h2>
+  <div class="row text-center mt-4">
+    <div class="col-md-4">
+      <div class="card p-3">
+        <h4>Total Books</h4>
+        <p class="display-6">{{ book_count }}</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card p-3">
+        <h4>Total Categories</h4>
+        <p class="display-6">{{ category_count }}</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card p-3">
+        <h4>Total Users</h4>
+        <p class="display-6">{{ user_count }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5 text-center">
+    <a href="/admin/catalogue/book/add/" class="btn btn-outline-primary me-2">Add Book</a>
+    <a href="/admin/catalogue/category/add/" class="btn btn-outline-secondary">Add Category</a>
+  </div>
+</div>
+{% endblock %}

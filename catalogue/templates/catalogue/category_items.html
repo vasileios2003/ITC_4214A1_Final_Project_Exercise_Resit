@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h2 class="mb-4">{{ category.name }} Books</h2>
+    <div class="row">
+      {% for book in books %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            {% if book.image %}                          
+              <img src="{{ book.image.url }}" class="book-image" alt="{{ book.name }}">
+            {% else %}
+              <img src="https://via.placeholder.com/300x400?text=No+Image" class="card-img-top">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ book.name }}</h5>
+              <p class="card-text"><strong>Author:</strong> {{ book.author }}</p>
+              <p class="card-text"><strong>Price:</strong> {{ book.price }} $</p>
+              <p class="card-text">{{ book.description|truncatewords:20 }}</p>
+              <a href="{% url 'book_detail' book.id %}" class="btn btn-outline-primary btn-sm">View Details</a>
+
+              <form method="post" action="{% url 'add_to_cart' book.id %}">
+                {% csrf_token %}
+                <button class="btn btn-success btn-sm mt-2" type="submit">Add to Cart</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <p>No books found in this category.</p>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

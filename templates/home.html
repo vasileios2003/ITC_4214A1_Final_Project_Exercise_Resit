@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container text-center mt-5">
+  <h1 class="display-4">Welcome to BookClub 📚</h1>
+  <p class="lead">Your one-stop shop for Fiction, Mystery, Fantasy, and more!</p>
+
+    <!-- SLIDESHOW -->
+<div class="slideshow-container">
+  <div class="mySlides">
+    <div class="numbertext">1 / 3</div>
+    <img src="{% static 'images/Image_Carouser_1.jpeg' %}">
+    <div class="text">Our Work</div>
+  </div>
+
+  <div class="mySlides">
+    <div class="numbertext">2 / 3</div>
+    <img src="{% static 'images/Image_Carouser_2.jpeg' %}">
+    <div class="text">Our People</div>
+  </div>
+
+  <div class="mySlides">
+    <div class="numbertext">3 / 3</div>
+    <img src="{% static 'images/Image_Carouser_3.jpeg' %}">
+    <div class="text">Our Environment</div>
+  </div>
+
+  <a class="prev" onclick="plusSlides(-1)">❮</a>
+  <a class="next" onclick="plusSlides(1)">❯</a>
+</div>
+
+<br>
+<div style="text-align:center">
+  <span class="dot" onclick="currentSlide(1)"></span>
+  <span class="dot" onclick="currentSlide(2)"></span>
+  <span class="dot" onclick="currentSlide(3)"></span>
+</div>
+
+
+  {% if user.is_authenticated %}
+    <p class="text-success">You're logged in as {{ user.username }}.</p>
+  {% else %}
+    <a href="{% url 'login' %}" class="btn btn-primary btn-lg me-2">Sign In</a>
+    <a href="{% url 'register' %}" class="btn btn-outline-secondary btn-lg">Register</a>
+  {% endif %}
+</div>
+{% endblock %}

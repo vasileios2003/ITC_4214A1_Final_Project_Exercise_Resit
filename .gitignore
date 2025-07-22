@@ -1,0 +1,16 @@
+# Ignore virtual environment
+venv/
+
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+
+# Ignore database and environment config
+db.sqlite3
+*.env
+
+# Ignore collected static files
+staticfiles/
+
+# VS Code settings (optional)
+.vscode/
